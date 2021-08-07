@@ -1,0 +1,35 @@
+.card{
+   font-size:3rem;
+   margin: auto;
+   margin-top: 2rem;
+   width: 25rem;
+   height: 32rem;
+   background-color:rgba(221, 221, 221, 0.1);
+   font-size:1rem;
+   text-align: center;
+   padding:2rem;
+   -webkit-box-shadow: 0px 1px 13px -3px rgba(0,0,0,0.75);
+   -moz-box-shadow: 0px 1px 13px -3px rgba(0,0,0,0.75);
+   box-shadow: 0px 1px 13px -3px rgba(0,0,0,0.75);
+}
+.name{
+  color:white;
+  font-weight: 700;
+  background-color:#0097a7;
+  padding:0.5rem;
+  text-decoration:none;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+.name:hover{
+    text-decoration:underline;
+}
+.noDecoration{
+    text-decoration:none;
+}
+.diets{
+    background-color: rgb(255, 216, 42);
+    width: 80%;
+    padding: 0.1rem;
+    list-style: none;
+}

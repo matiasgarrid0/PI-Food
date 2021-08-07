@@ -1,0 +1,55 @@
+.hero{
+  background-image: url(../img/Landing.jpg);
+  background-position: 0rem 25%;
+  background-size: cover;
+  margin-top:0;
+  font-size: 2rem; 
+  padding: 0.2rem;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  padding: 4rem;
+  color: #ffffff;
+}
+.hero_bold{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.h1_hero{
+    padding:1rem 8rem;
+}
+.center{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+}
+.phrases{
+    font-size:2rem;
+}
+.btn {
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 1rem 3rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background-color .3s ease;
+    border-radius:15px;
+  }
+  
+  .btn:hover {
+    background-color: #ffffff;
+    color: #0097a7;
+    border: solid 1px #0097a7;
+    }
+    .btn-verde {
+    background-color: #0097a7;
+    color: white;
+    border: 1px solid #0097a7;
+    margin-left: 2rem;
+    }
