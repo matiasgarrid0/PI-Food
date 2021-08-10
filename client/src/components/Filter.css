@@ -1,0 +1,11 @@
+.center{
+    display:flex;
+    flex-direction:column;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;  
+}
+.select{
+    border-radius: 10px;
+    outline:none;
+}

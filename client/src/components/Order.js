@@ -2,7 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {getOrder} from '../actions/index'
 
-const Order = ({ 
+const Order = ({
+    filteredRecipes, 
     getOrder,
 }) =>{
     const handleFilter = (e) =>{

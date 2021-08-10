@@ -12,7 +12,7 @@ export const Card = ({recipe}) => {
             </Link>
             <img src={image} style = {{width: 150, height: 150}} alt="food"/>
             <ul className="order">
-                {diets? <div>
+                {diets? <div className="grid">
                     {diets &&diets.map((e,i) =>(<li className = "diets" key={i}>{e}</li>))}
                 </div>:null}
                 {types? <div>
