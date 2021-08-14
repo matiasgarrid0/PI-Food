@@ -6,7 +6,7 @@ import './CreateRecipe.css'
 const CreateRecipe = () =>{
     const dispatch = useDispatch()
     const type = useSelector(state => state.recipeDiets)
-
+    const [error, setError] = useState('')
     const [input, setInput] = useState({
         title: '',
         summary: '',
@@ -51,6 +51,62 @@ const CreateRecipe = () =>{
     useEffect(() => {
        dispatch(getRecipeDiets()) 
     }, [])
+
+    function validater(value, type) {
+        switch (type) {
+            case "title":
+                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
+                    setError('el Nombre tiene que ser un texto');
+                } else {
+                    setError('Es necesario un resumen');
+                }
+                setInput({ ...input, title: value });
+                break;
+            case "summary":
+                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
+                    setError('el valor tiene que ser un texto');
+                } else {
+                    setError(-1);
+                }
+                setInput({ ...input, summary: value});
+                break;
+            case "healthScore":
+                if (100 > parseInt(value) > 0 || value === '-') {
+                    setError(-1);
+                } else {
+                    setError('el valor tiene que ser entre 0 y 100');
+                }
+                setInput({ ...input, healthScore: value });
+                break;
+            case "spoonacularScore":
+                if (100 > parseInt(value) > 0 || value === '-') {
+                    setError(-1);
+                } else {
+                    setError('el valor tiene que ser entre 0 y 100');
+                }
+                setInput({ ...input, spoonacularScore: value });
+                break;
+            case "analyzedInstructions":
+                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
+                    setError('el valor tiene que ser un texto');
+                } else {
+                    setError(-1);
+                }
+                setInput({ ...input, analyzedInstructions: [value] });
+                break;
+            case "steps":
+                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
+                    setError('el valor tiene que ser un texto');
+                } else {
+                 setError(-1);
+                }
+                setInput({ ...input, steps: [value] });
+                break;    
+            default:
+                break;
+        }
+
+    }
 
   return(
       <div>
