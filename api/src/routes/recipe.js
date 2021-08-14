@@ -60,7 +60,7 @@ router.get('/:id', async (req, res)=>{
     console.log(id)
     const recipesTotal = await getAllRecipes();
     if(id){
-        let recipeId = await recipesTotal.filter(e => e.id === Number(id))
+        let recipeId = await recipesTotal.filter(e => e.id == (id))
         recipeId.length ?
         res.status(200).json(recipeId) :
         res.status(404).send('Recipe not found')
@@ -73,7 +73,7 @@ router.post('/', async (req, res) => {
      summary,
      spoonacularScore,
      healthScore,
-     analyzedInstructions,
+     steps,
      image,
      type,
     } = req.body;
@@ -82,7 +82,7 @@ router.post('/', async (req, res) => {
         summary,
         spoonacularScore,
         healthScore,
-        analyzedInstructions,
+        steps,
         image,
     });
     // await createRecipe.setTypes(type);

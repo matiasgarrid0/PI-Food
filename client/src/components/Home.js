@@ -1,7 +1,8 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getAllRecipes, filterByDiet, getRecipeName } from '../actions';
+import {Link} from 'react-router-dom'
+import { getAllRecipes, dietsFilter, getRecipeName } from '../actions';
 import { Card } from './Card';
 import Order from './Order';
 import Filter from './Filter';
@@ -14,7 +15,7 @@ export const Home = () => {
 
     const dispatch = useDispatch();
     const Recipes = useSelector(state => state.recipes);
-    // const filteredRecipes = useSelector(state => state.filteredRecipes) 
+    const filteredRecipes = useSelector(state => state.filteredRecipes) 
     const state = useSelector(state => state)
     // const [currentPage, setCurrentPage] = useState(1);
     // const [recipesPerPage, setRecipesPerPage] = useState(9)
@@ -24,7 +25,7 @@ export const Home = () => {
     // const [filtro, setFiltro] = useState({
     //     diets:'', 
     // });
-    // const [resultado, setResultado] = useState(state.filteredRecipes)
+    const [resultado, setResultado] = useState(state.filteredRecipes)
     const [title, setName] = useState("")
     const [pageNumber, setPageNumber] = useState(0);
     const recipesPerPage = 9;
@@ -48,10 +49,13 @@ export const Home = () => {
     useEffect(()=>{
         dispatch(getAllRecipes());
     }, []);
-
-    const handleFilterStatus = (e) => {
-        dispatch(filterByDiet(e.target.value));
+    function handleFilter(e) {
+        dispatch(dietsFilter(e.target.value))
     }
+
+    // const handleFilterStatus = (e) => {
+    //     dispatch(getByDiet(e.target.value));
+    // }
 
     const handleClick = (e) =>{
         e.preventDefault();
@@ -80,6 +84,16 @@ export const Home = () => {
 
     return (
         <div>
+            <div className="heroHome">
+                <div className="">
+                    <h1 className="h1_hero hero_bold">Food-Recipes</h1>
+                </div>
+                    <Link className="" to="/recipes">
+                        <button  className="btn btn-verde" type="button">
+                        Create Recipe
+                        </button>
+                    </Link>
+            </div>
             <div>
                 <SearchBar
                       title = {title}
@@ -97,7 +111,7 @@ export const Home = () => {
          <div className="center">
              <p>Filer by Diets-Types</p>
 
-            <select className="select"  onChange={e => handleFilterStatus(e)}>
+            <select className="select"  onChange={(e) => handleFilter(e)}>
                 <option value="All">All</option>
                 <option value="vegan">Vegan</option>
                 <option value="paleolithic">Paleolithic</option>
@@ -112,11 +126,12 @@ export const Home = () => {
             </select>
         </div>
             <div className="center">
+            <p>Order</p>
                 <Order/>
             </div>
             <div>
             <div className="disposition">
-                {displayRecipes}
+                {displayRecipes} 
              </div>
                 <div >
                     <div className="paginateBar">

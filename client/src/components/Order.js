@@ -15,9 +15,8 @@ const Order = ({
         console.log(e.target.id)
     }
     return (
-        <div >
+        <div>
             <div className="centerx">
-                
                  <button id='A-Z' className="btn btn-verde" type="button" onClick={handleOrder}>
                      A-Z
                  </button>

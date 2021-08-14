@@ -1,12 +1,11 @@
-
-export const getFilterDiet = (diet, array) => {
-    console.log( "array",array)
+export const filterByDiets = (array, diet) => {
+    
     if(diet !== 'all'){
 
-        let filtered = array.filter(c =>  {
-            if (c.types) {
-                for (let i = 0; i < c.types.length; i++) {
-                    if (c.types[i].name === diet) {
+        let filtered = array.filter((c) => {
+            if (c.Types) {
+                for (let i = 0; i < c.Types.length; i++) {
+                    if (c.Types[i].name === diet) {
                         return true;
                     }
                 }
@@ -24,7 +23,6 @@ export const getFilterDiet = (diet, array) => {
     } return array
   
 
-
 };
 
-export default getFilterDiet;
+export default filterByDiets;

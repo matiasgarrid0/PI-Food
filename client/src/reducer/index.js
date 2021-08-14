@@ -1,5 +1,5 @@
 import { getOrder } from "../controllers/getOrder";
-import {getFilterDiet} from '../controllers/getFilterDiet';
+import {filterByDiets} from '../controllers/getFilterDiet';
 
 const initialState = {
     recipesFilteredByDiet:[],
@@ -8,6 +8,7 @@ const initialState = {
     filteredRecipes:[],
     recipeDiets:[],
     detail: {},
+    recipesFilteredByDiet:[],
 }
 
 const recipeReducer = (state = initialState, {payload, type}) => {
@@ -25,28 +26,48 @@ const recipeReducer = (state = initialState, {payload, type}) => {
              filteredRecipes: arr,
          }
          return newState;
-     case 'GET_RECIPE_DETAIL':
-         return{
-             ...state,
-             recipeDetail: payload,
-         }
+    //  case 'GET_RECIPE_DETAIL':
+    //      return{
+    //          ...state,
+    //          recipeDetail: payload,
+    //      }
     //  case 'FILTER_BY_DIET': 
     //       const Recipes = state.recipes  
-    //     //   const statusFilter = payload === 'All' ? Recipes : Recipes.filter(e => e.diets === payload)
+    //       const statusFilter = payload === 'All' ? Recipes : Recipes.filter(e => e.diets === payload)
     //       return{
     //          ...state,
-    //          recipes: getFilterDiet(payload, state.recipes),
+    //          recipes: getByDiet(payload, state.recipes),
     //       }
-    case 'GET_RECIPE_NAME':
+     case 'GET_RECIPE_NAME':
         return {
             ...state,
             recipes: payload
         }   
-        case 'GET_RECIPE_DETAIL':
-            return {
+     case 'GET_RECIPE_DETAIL':
+         return {
+          ...state,
+          detail: payload
+         }; 
+     case 'GET_RECIPE_DIETS':
+          return{
+           ...state,
+           recipeDiets: payload
+          };     
+     case 'POST_RECIPE':
+         return {
+             ...state,
+         }
+    case 'DIETS_FILTER':
+            
+            let algo = filterByDiets(state.allRecipes, payload)
+            
+            return{
                 ...state,
-                detail: payload
-            };   
+                recipes: algo,
+                recipesFilteredByDiet:algo,
+                filterName:payload
+
+            };            
              
      default:
         return state;  
