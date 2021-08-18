@@ -52,61 +52,7 @@ const CreateRecipe = () =>{
        dispatch(getRecipeDiets()) 
     }, [])
 
-    function validater(value, type) {
-        switch (type) {
-            case "title":
-                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
-                    setError('el Nombre tiene que ser un texto');
-                } else {
-                    setError('Es necesario un resumen');
-                }
-                setInput({ ...input, title: value });
-                break;
-            case "summary":
-                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
-                    setError('el valor tiene que ser un texto');
-                } else {
-                    setError(-1);
-                }
-                setInput({ ...input, summary: value});
-                break;
-            case "healthScore":
-                if (100 > parseInt(value) > 0 || value === '-') {
-                    setError(-1);
-                } else {
-                    setError('el valor tiene que ser entre 0 y 100');
-                }
-                setInput({ ...input, healthScore: value });
-                break;
-            case "spoonacularScore":
-                if (100 > parseInt(value) > 0 || value === '-') {
-                    setError(-1);
-                } else {
-                    setError('el valor tiene que ser entre 0 y 100');
-                }
-                setInput({ ...input, spoonacularScore: value });
-                break;
-            case "analyzedInstructions":
-                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
-                    setError('el valor tiene que ser un texto');
-                } else {
-                    setError(-1);
-                }
-                setInput({ ...input, analyzedInstructions: [value] });
-                break;
-            case "steps":
-                if (!/^([a-zA-Z]+( [a-zA-Z]+)+)$/.test(value)) {
-                    setError('el valor tiene que ser un texto');
-                } else {
-                 setError(-1);
-                }
-                setInput({ ...input, steps: [value] });
-                break;    
-            default:
-                break;
-        }
-
-    }
+ 
 
   return(
       <div>
@@ -115,18 +61,16 @@ const CreateRecipe = () =>{
                   <h1 className="h1_hero">Create Recipe</h1>
               </div>
           </div>
-          <div className="paddingForm">
+          <div className="paddingForm spooncular">
               <form onSubmit={(e)=>handleSubmit(e)} className="formulario">
                   <label>Title</label>
-                  <input className="searchBar" type="text" value={input.title} name="title" placeholder="Title" onChange = {(e)=>handleChange(e)}></input>
-                  <label>Summary</label>
-                  <textarea className="searchBar" type="text" value={input.summary} name="summary" placeholder="" onChange = {(e)=>handleChange(e)}></textarea>
+                  <input className="searchBar" type="text" id= "title"  value={input.title} name="title" placeholder="Title" onChange = {(e)=>handleChange(e)} ></input>
                   <label>Spoonacular Score</label>
-                  <input className="searchBar" type="number" name="spoonacularScore" value={input.spoonacularScore} placeholder="" onChange = {(e)=>handleChange(e)}></input>
+                  <input className="searchBar" type="number" id= "spoonacularScore" name="spoonacularScore" value={input.spoonacularScore} placeholder="" onChange = {(e)=>handleChange(e)} ></input>
                   <label>Health Score</label>
-                  <input className="searchBar" type="number" name="healthScore" value = {input.healthScore} placeholder="" onChange = {(e)=>handleChange(e)}></input>
+                  <input className="searchBar" type="number" id= "healthScore" name="healthScore" value = {input.healthScore} placeholder="" onChange = {(e)=>handleChange(e)} onChange = {(e)=>handleChange(e)} ></input>
                   <label>Image</label>
-                  <input className="searchBar" type="text" name="image" value = {input.image} placeholder="Paste URL image" onChange = {(e)=>handleChange(e)}></input>
+                  <input className="searchBar" type="text" id= "image" name="image" value = {input.image} placeholder="Paste URL image" onChange = {(e)=>handleChange(e)} onChange = {(e)=>handleChange(e)} ></input>
                   <label>Diets</label>
                   
                       <select onChange = {(e)=>handleSelect(e)} className="searchBar">
@@ -135,9 +79,10 @@ const CreateRecipe = () =>{
                           ))}
                       </select>
                       {/* <ul><li className="list">{input.type.map(e => e + ", ")}</li></ul> */}
-                  
+                      <label>Summary</label>
+                  <textarea className="searchBar" cols="30" rows="3" type="text" id= "summary" value={input.summary} name="summary" placeholder="" onChange = {(e)=>handleChange(e)} onChange = {(e)=>handleChange(e)}></textarea>
                   <label>Step by step</label>
-                  <textarea className="searchBar" name="steps" value = {input.steps} onChange = {(e)=>handleChange(e)} ></textarea>
+                  <textarea className="searchBar" cols="30" rows="5" name="steps" id= "steps" value = {input.steps} onChange = {(e)=>handleChange(e)} onChange = {(e)=>handleChange(e)}></textarea>
                   <button className="btn btn-verde" type="submit" name="">Create Recipe</button>
               </form>
           </div>
