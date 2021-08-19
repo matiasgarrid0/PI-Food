@@ -20,24 +20,13 @@ const recipeReducer = (state = initialState, {payload, type}) => {
              allRecipes: payload,
          }
      case 'GET_ORDER':
-         const arr = getOrder(payload, state.recipes);
+        //  const arr = getOrder(payload, state.recipes);
          const newState = {
              ...state,
-             filteredRecipes: arr,
+             filteredRecipes: [...getOrder(payload, state.recipes)],
          }
          return newState;
-    //  case 'GET_RECIPE_DETAIL':
-    //      return{
-    //          ...state,
-    //          recipeDetail: payload,
-    //      }
-    //  case 'FILTER_BY_DIET': 
-    //       const Recipes = state.recipes  
-    //       const statusFilter = payload === 'All' ? Recipes : Recipes.filter(e => e.diets === payload)
-    //       return{
-    //          ...state,
-    //          recipes: getByDiet(payload, state.recipes),
-    //       }
+   
      case 'GET_RECIPE_NAME':
         return {
             ...state,

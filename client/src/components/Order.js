@@ -1,19 +1,25 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getOrder} from '../actions/index'
-
+import {useState, useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 const Order = ({
     filteredRecipes, 
     getOrder,
 }) =>{
-    const handleFilter = (e) =>{
-        getOrder(e.target.value);
-    };
+    const Recipes = useSelector(state => state.recipes);
+    const [aux, setAux] = useState(false)
+
+    // const handleFilter = (e) =>{
+    //     getOrder(e.target.value);
+    // };
     const handleOrder = (e) =>{
         e.preventDefault();
         getOrder(e.target.id);
+        setAux(!aux)
         console.log(e.target.id)
     }
+    
     return (
         <div>
             <div className="centerx">
@@ -41,7 +47,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 const mapStateToProps = (state) =>{
     return{
-    filteredRecipes: state.filteredRecipes
+    filteredRecipes: state.recipes
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Order);

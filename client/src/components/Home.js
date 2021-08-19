@@ -7,55 +7,31 @@ import { Card } from './Card';
 import Order from './Order';
 import Filter from './Filter';
 import SearchBar from './SeacrchBar';
-import ReactPaginate from "react-paginate";
-
+import Paginate from './Paginate';
 import './Home.css'
 
 export const Home = () => {
 
     const dispatch = useDispatch();
     const Recipes = useSelector(state => state.recipes);
-    const filteredRecipes = useSelector(state => state.filteredRecipes) 
-    const state = useSelector(state => state)
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [recipesPerPage, setRecipesPerPage] = useState(9)
-    // const indexOfLastRecipe = currentPage * recipesPerPage;
-    // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-    // const currentRecipes = Recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
-    // const [filtro, setFiltro] = useState({
-    //     diets:'', 
-    // });
-    const [resultado, setResultado] = useState(state.filteredRecipes)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recipesPerPage, setRecipesPerPage] = useState(9)
+    const indexOfLastRecipe = currentPage * recipesPerPage;
+    const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+    const currentRecipes = Recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
     const [title, setName] = useState("")
-    const [pageNumber, setPageNumber] = useState(0);
-    const recipesPerPage = 9;
-    const pagesVisited = pageNumber * recipesPerPage;
-    const pageCount = Math.ceil(Recipes.length / recipesPerPage);
-    
-    const changePage = ({ selected }) => {
-        setPageNumber(selected);
-    };
 
-    // const paginate = (pageNumber) =>{
-    //     setCurrentPage(pageNumber)
-    // }
-    // useEffect(() => {
-    //     dispatch( getByDiet(filtro.diets))
-    // }, [dispatch, filtro]);
-    // useEffect(() => {
-    //     setResultado(state.filteredRecipes)
-    // },[state.filteredRecipes])
-
+    const paginate = (pageNumber) =>{
+        setCurrentPage(pageNumber)
+    }
+  
     useEffect(()=>{
         dispatch(getAllRecipes());
-    }, []);
-    function handleFilter(e) {
+    }, [dispatch,Recipes]);
+
+    const handleFilter =(e) => {
         dispatch(dietsFilter(e.target.value))
     }
-
-    // const handleFilterStatus = (e) => {
-    //     dispatch(getByDiet(e.target.value));
-    // }
 
     const handleClick = (e) =>{
         e.preventDefault();
@@ -68,20 +44,10 @@ export const Home = () => {
        e.preventDefault();
        if (title.length) {
            dispatch(getRecipeName(title));
-           console.log(title)
        }
    };
-    const displayRecipes = Recipes
-    .slice(pagesVisited, pagesVisited + recipesPerPage)
-    .map(recipe => {
-           return (
-               <Card
-               key={recipe.id}
-               recipe = {recipe}
-               />
-           )                                                           
-    })
-
+   
+  
     return (
         <div>
             <div className="heroHome">
@@ -112,7 +78,6 @@ export const Home = () => {
              <p>Filer by Diets-Types</p>
 
             <select className="select"  onChange={(e) => handleFilter(e)}>
-                <option value="All">All</option>
                 <option value="vegan">Vegan</option>
                 <option value="paleolithic">Paleolithic</option>
                 <option value="lacto ovo vegetarian">Lacto Ovo Vegetarian</option>
@@ -126,30 +91,31 @@ export const Home = () => {
             </select>
         </div>
             <div className="center">
-            <p>Order</p>
-                <Order/>
+                <p>Order</p>
+                <Order
+                 
+                />
             </div>
             <div>
-            <div className="disposition">
-                {displayRecipes} 
-             </div>
-                <div >
-                    <div className="paginateBar">
-                            <ReactPaginate
-                                previousLabel={"Previous"}
-                                nextLabel={"Next"}
-                                pageCount={pageCount}
-                                onPageChange={changePage}
-                                containerClassName={"paginationBttns"}
-                                previousLinkClassName={"previousBttn"}
-                                nextLinkClassName={"nextBttn"}
-                                disabledClassName={"paginationDisabled"}
-                                activeClassName={"paginationActive"}
+                <div className="disposition">
+                    {currentRecipes?.map(recipe => {
+                        return (
+                            <Card
+                            key={recipe.id}
+                            recipe = {recipe}
                             />
-                    </div>
+                        )                                                           
+                    })}
                 </div>
             </div>
-           
+            <div>
+                <Paginate
+                   recipesPerPage={recipesPerPage}
+                   Recipes={Recipes.length}
+                   paginate={paginate}  
+
+                />
+            </div>
         </div>
     )
 }

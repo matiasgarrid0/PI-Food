@@ -51,13 +51,12 @@ router.get('/', async (req, res)=>{
         res.status(200).send(recipeName) :
         res.status(404).send('Recipe not found');
     }else{
-        res.status(200).send(totalRecipes);
+        res.status(200).json(totalRecipes);
     }
 });
 
 router.get('/:id', async (req, res)=>{
     let id = req.params.id;
-    console.log(id)
     const recipesTotal = await getAllRecipes();
     if(id){
         let recipeId = await recipesTotal.filter(e => e.id == (id))
@@ -85,8 +84,6 @@ router.post('/', async (req, res) => {
         steps,
         image,
     });
-    // await createRecipe.setTypes(type);
-    // return res.status(200).send(createRecipe)
     const recipeId = await Type.findAll({where: {name: type}})
     createRecipe.addType(recipeId);
     res.send('Recipe created successfully')

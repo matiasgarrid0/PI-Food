@@ -16,7 +16,7 @@ export const Card = ({recipe}) => {
                 {diets? <div className="grid">
                     {diets &&diets.map((e,i) =>(<li className = "diets" key={i}>{e}</li>))}
                 </div>:null}
-                {types? <div>
+                {types? <div className="grid">
                     {types &&types.map((e,i) =>(<li className = "diets" key={i}>{e.name}</li>))}
                 </div>:null}
             </ul>

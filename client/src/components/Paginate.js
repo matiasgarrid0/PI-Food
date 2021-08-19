@@ -1,22 +1,22 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import './Paginate.css'
 const Paginate = ({recipesPerPage, Recipes, paginate}) => {
-    const pageNumbers = [];
-    for(let i = 0; i <= Math.ceil(Recipes/recipesPerPage); i++){
-        pageNumbers.push(i)
+    
+    const pageNumber = [];
+    for(let i = 1; i <= Math.ceil(Recipes/recipesPerPage); i++){
+        pageNumber.push(i)
     }
     return(
-        <nav>
-            <ul className="list">
-                {pageNumbers &&
-                    pageNumbers.map(number =>(
-                        <li className="list" key= {number}>
-                            <a className="paginationBttns" onClick={() =>paginate(number)}>{number}</a>
-                        </li>
+        <Fragment >
+            <div className= "align">
+                {pageNumber &&
+                    pageNumber.map(number =>(
+                                         
+                            <button key={number} className="BUTTON_PAG" onClick={() =>paginate(number)}>{number}</button>    
                     ))                
-                }
-            </ul>
-        </nav>
+                }  
+            </div>      
+        </Fragment>
     )
 }
 export default Paginate;

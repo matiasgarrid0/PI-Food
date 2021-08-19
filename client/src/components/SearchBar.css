@@ -16,16 +16,17 @@
   border: 0.1px solid #2f2f2f;
   }
   .btnSearchBar:hover {
-    background-color: #018a71;
-    color: #0097a7;
-    border: solid 0.1px #71B100;
+    background-color: #0dac8e;
+    color: #ffffff;
+    border: solid 0.1px #0dac8e;
   }
   .btnSearchBar {
     color: white;
     font-weight: 700;
     text-decoration: none;
-    font-size: 0.3rem;
-    /* padding: 1rem 1rem; */
+    font-size: 1rem;
+    padding: 0.5rem;;
+  
     /* margin-top: 1rem;
     margin-bottom: 1rem; */
     margin-left: 0rem;

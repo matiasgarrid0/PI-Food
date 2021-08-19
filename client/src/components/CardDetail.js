@@ -8,7 +8,6 @@ import './CardDetail.css'
 export const CardDetail = ({match}) => {
     const recipeDetail = useSelector(state => state.detail);
    
-    console.log(recipeDetail)
     const dispatch = useDispatch()
 
     useEffect(() => {

@@ -55,3 +55,6 @@
     outline:none;
     border: none;
     }
+    .error{
+      color:rgb(255, 0, 0);
+    }
